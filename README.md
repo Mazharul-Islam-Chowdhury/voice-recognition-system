@@ -1,281 +1,151 @@
-<div align="center">
+<p align="center">
+  <img src="assets/banner.svg" alt="Voice Recognition System" width="100%"/>
+</p>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0F2027,50:203A43,100:2C5364&height=200&section=header&text=VOICE%20RECOGNITION%20SYSTEM&fontSize=35&fontColor=FFFFFF&animation=fadeIn&fontAlignY=38&desc=MATLAB%20%7C%20DSP%20%7C%20MACHINE%20LEARNING&descAlignY=60&descSize=16" width="100%" alt="Voice Recognition System banner"/>
+<p align="center">
+  <img alt="MATLAB" src="https://img.shields.io/badge/MATLAB-R20XXa%2B-orange?logo=mathworks&logoColor=white">
+  <img alt="Platform" src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey">
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-green">
+  <img alt="Status" src="https://img.shields.io/badge/status-active%20development-blue">
+</p>
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=22&duration=3000&pause=800&color=00C2FF&center=true&vCenter=true&width=650&lines=Listening+to+the+World;Processing+Speech+Signals;Extracting+MFCC+Features;Exploring+Machine+Learning" alt="Animated typing introduction"/>
-
-<br>
-
-![MATLAB](https://img.shields.io/badge/MATLAB-Engineering-orange?style=for-the-badge&logo=mathworks&logoColor=white)
-![DSP](https://img.shields.io/badge/Digital-Signal_Processing-0078D4?style=for-the-badge)
-![Machine Learning](https://img.shields.io/badge/Machine-Learning-8A2BE2?style=for-the-badge)
-![Platform](https://img.shields.io/badge/Platform-Windows-lightgrey?style=for-the-badge&logo=windows)
-
-**Turning audio signals into meaningful information through signal processing and machine learning.**
-
-</div>
+<p align="center">
+  A MATLAB speech-processing project that records voice samples, extracts <b>MFCC</b> features,<br>
+  trains a classifier, and recognises voices in <b>real time</b> from a microphone.
+</p>
 
 ---
 
-## 🎙️ About the Project
+## Demo
 
-The **Voice Recognition System** is a MATLAB-based engineering project focused on speech signal processing, audio feature extraction, and machine learning.
+<p align="center">
+  <img src="assets/demo.gif" alt="Real-time voice detector GUI demo" width="720"/>
+</p>
 
-The idea behind this project is simple: how can a computer analyze a voice recording and use the information contained in the audio signal to recognize or classify a voice?
+> Screen recording of `realtime_voice_detector_gui.m` in action.
+> *(Add your own capture at `assets/demo.gif`; see [Adding the demo GIF](#adding-the-demo-gif).)*
 
-To explore this question, the project combines digital signal processing (DSP), Mel-Frequency Cepstral Coefficients (MFCC), machine learning, and graphical user interfaces.
+## Pipeline
 
-From recording voice samples to extracting audio features and experimenting with real-time detection, the project provides a practical way to understand the fundamentals of voice recognition.
+<p align="center">
+  <img src="assets/pipeline.svg" alt="Animated processing pipeline" width="100%"/>
+</p>
 
-## ✨ Key Features
-
-- 🎤 **Voice Recording:** Collect voice samples for training and experimentation.
-- 📊 **MFCC Feature Extraction:** Extract useful spectral characteristics from audio signals.
-- 🧠 **Machine Learning:** Train a classifier to identify patterns in voice data.
-- ⚡ **Real-Time Detection:** Explore voice detection using microphone input.
-- 🖥️ **Graphical User Interface:** Interact with the recording and detection workflow.
-- 💾 **Model Storage:** Save and load trained model data for further experiments.
-- 🔬 **Signal Processing:** Explore how audio signals can be transformed into meaningful features.
-
-*The availability of individual features depends on the implementation and compatibility of the MATLAB scripts in the repository.*
-
-## 🛠️ Technologies Used
-
-<div align="center">
-
-![MATLAB](https://img.shields.io/badge/MATLAB-orange?style=flat-square&logo=mathworks&logoColor=white)
-![Signal Processing](https://img.shields.io/badge/Digital%20Signal%20Processing-blue?style=flat-square)
-![MFCC](https://img.shields.io/badge/MFCC-Feature%20Extraction-green?style=flat-square)
-![Machine Learning](https://img.shields.io/badge/Machine%20Learning-Classification-purple?style=flat-square)
-![Audio](https://img.shields.io/badge/Audio-Microphone-red?style=flat-square)
-
-</div>
-
-| Technology | Purpose |
+| Stage | What happens |
 |---|---|
-| MATLAB | Main development environment |
-| Digital Signal Processing | Audio analysis and preprocessing |
-| MFCC | Audio feature extraction |
-| Machine Learning | Voice classification |
-| MATLAB GUI | User interaction |
-| MAT-files | Saving trained model data |
+| **Microphone** | Audio is captured at `[FS]` Hz, mono. |
+| **Preprocessing** | Signal is split into `[FRAME_MS]` ms frames with `[OVERLAP]`% overlap, windowed with a `[WINDOW]` window, and normalised. |
+| **MFCC** | `[N_MFCC]` coefficients per frame from a `[N_FILTERS]`-band Mel filter bank, summarised into one feature vector per recording. |
+| **Classifier** | `[CLASSIFIER, e.g. SVM / k-NN]` trained on the recorded dataset. |
+| **Prediction** | Predicted label and confidence are shown live in the GUI. |
 
-## ⚙️ How It Works
+## Features
 
-<div align="center">
+- **Dataset recorder:** GUI for capturing labelled voice samples.
+- **MFCC extraction:** compact spectral features, with a standalone script for study and experiments.
+- **Classifier training:** trains on your recorded dataset and saves the model to a `.mat` file.
+- **Real-time detection:** live microphone input with on-screen prediction.
 
-<p align="center"> <img src="assets/pipeline.svg" alt="Animated processing pipeline" width="100%"/> </p>
-Stage	What happens
-Microphone	Audio is captured at [FS] Hz, mono.
-Preprocessing	Signal is split into [FRAME_MS] ms frames with [OVERLAP]% overlap, windowed with a [WINDOW] window, and normalised.
-MFCC	[N_MFCC] coefficients per frame from a [N_FILTERS]-band Mel filter bank, summarised into one feature vector per recording.
-Classifier	[CLASSIFIER, e.g. SVM / k-NN] trained on the recorded dataset.
-Prediction	Predicted label and confidence are shown live in the GUI.
+## Repository Structure
 
-</div>
-
-### 1. Voice Data Collection
-
-Voice samples are recorded through a microphone and organized into a dataset. These recordings provide examples for training and testing the recognition system.
-
-### 2. Audio Preprocessing
-
-Audio signals may be prepared for analysis through operations such as framing, windowing, filtering, and normalization, depending on the implementation.
-
-### 3. MFCC Feature Extraction
-
-MFCC converts short segments of audio into a compact set of coefficients representing important characteristics of the speech spectrum.
-
-### 4. Machine Learning
-
-A classifier is trained using the extracted features to learn patterns from the available voice data.
-
-### 5. Real-Time Detection
-
-The detection interface provides a way to work with live microphone input and the available trained model.
-
-### 6. Recognition Output
-
-The system produces a classification result based on the implemented model. Its reliability depends on the training dataset, feature consistency, and evaluation process.
-
-## 📂 Project Structure
-
-```text
+```
 voice-recognition-system/
-│
-├── mfcc_basic.m
-│   └── Basic MFCC feature extraction
-│
-├── record_voice_dataset_gui.m
-│   └── GUI for recording voice samples
-│
-├── train_voice_classifier_gui_old.m
-│   └── Legacy voice classifier training script
-│
-├── realtime_voice_detector_gui.m
-│   └── Real-time voice detection interface
-│
-├── voice_model_old.mat
-│   └── Saved model data
-│
+├── assets/                          # README images and animations
+├── mfcc_basic.m                     # Standalone MFCC feature extraction
+├── record_voice_dataset_gui.m       # GUI: record labelled voice samples
+├── train_voice_classifier_gui_old.m # Training script (legacy, see Known Issues)
+├── realtime_voice_detector_gui.m    # GUI: live voice detection
+├── voice_model_old.mat              # Saved model (legacy)
 └── README.md
-    └── Project documentation
 ```
 
-**Note:** The training script and saved model contain an `_old` suffix. Their compatibility with the current recording and detection scripts should be verified.
+## Requirements
 
-## 🚀 Getting Started
+| Item | Version / Note |
+|---|---|
+| MATLAB | `[R20XXa or newer]` |
+| Audio Toolbox | `[required / not required]` |
+| Statistics and Machine Learning Toolbox | `[required / not required]` |
+| Signal Processing Toolbox | `[required / not required]` |
+| Hardware | Working microphone |
 
-### Prerequisites
-
-Before running the project, make sure you have:
-
-- MATLAB installed on your computer.
-- A working microphone for recording and real-time input.
-- The project files downloaded locally.
-- Any MATLAB toolboxes required by the functions used in the scripts.
-
-### Step 1: Clone the Repository
-
-Open a terminal and run:
+## Quick Start
 
 ```bash
 git clone https://github.com/Mazharul-Islam-Chowdhury/voice-recognition-system.git
-```
-
-Navigate to the project folder:
-
-```bash
 cd voice-recognition-system
 ```
 
-Alternatively, download the repository as a ZIP file and extract it.
-
-### Step 2: Open MATLAB
-
-Launch MATLAB and set the Current Folder to your project directory.
-
-Ensure the scripts and model files are available in the working directory.
-
-### Step 3: Record Voice Samples
-
-Run the recording interface:
+Open MATLAB, set the **Current Folder** to the project directory, then run the steps in order:
 
 ```matlab
+% 1. Record labelled samples (one class per speaker or word)
 record_voice_dataset_gui
-```
 
-Follow the instructions displayed by the GUI.
-
-### Step 4: Explore MFCC Extraction
-
-Run:
-
-```matlab
+% 2. (Optional) Inspect how MFCC features are computed
 mfcc_basic
-```
 
-Review the script to understand how audio is transformed into MFCC features.
-
-### Step 5: Train the Classifier
-
-The repository contains the following legacy training script:
-
-```matlab
+% 3. Train the classifier on the recorded dataset
 train_voice_classifier_gui_old
-```
 
-Run it if its dependencies and expected dataset format are available.
-
-### Step 6: Launch Real-Time Detection
-
-Run:
-
-```matlab
+% 4. Start real-time detection
 realtime_voice_detector_gui
 ```
 
-Follow the interface instructions and verify that the correct trained model is loaded.
+**Tip:** record at least `[N]` samples per class in a quiet room, using the same microphone for recording and detection.
 
-**Troubleshooting tip:** If the system reports a missing model or a feature-dimension mismatch, check that the training and detection scripts use compatible MFCC settings, model variables, and input formats.
+## How MFCC Works
 
-## 🧪 Understanding MFCC
+1. Split the signal into short frames.
+2. Apply a window function (reduces spectral leakage).
+3. Compute the magnitude spectrum with the FFT.
+4. Pass it through a Mel-scaled filter bank.
+5. Take the logarithm of the filter-bank energies.
+6. Apply the DCT to decorrelate and keep the first `[N_MFCC]` coefficients.
 
-Mel-Frequency Cepstral Coefficients are widely used in speech processing because they provide a compact representation of audio spectral characteristics.
+## Results
 
-A typical MFCC extraction pipeline includes:
+> Replace the placeholders with your measured results on a **held-out test set**.
 
-1. Dividing the audio signal into short frames.
-2. Applying a window function.
-3. Computing the frequency spectrum using the Fourier transform.
-4. Applying Mel-scaled filter banks.
-5. Taking the logarithm of the filter-bank energies.
-6. Applying the Discrete Cosine Transform (DCT).
+| Metric | Value |
+|---|---|
+| Classes | `[N]` |
+| Training samples | `[N]` |
+| Test samples | `[N]` |
+| Accuracy | `[XX.X %]` |
+| Precision / Recall | `[XX.X %]` / `[XX.X %]` |
 
-The resulting coefficients can be used as input features for a machine learning classifier.
+<p align="center">
+  <img src="assets/confusion_matrix.png" alt="Confusion matrix" width="420"/>
+</p>
 
-## 🎯 Project Objectives
+## Known Issues
 
-- Understand the fundamentals of speech signal processing.
-- Explore MFCC-based audio feature extraction in MATLAB.
-- Develop a workflow for voice dataset collection.
-- Investigate machine learning for voice classification.
-- Build a GUI-based audio recording and detection workflow.
-- Study the challenges of applying trained models to real-time audio.
+- `train_voice_classifier_gui_old.m` and `voice_model_old.mat` are legacy files. If detection reports a missing variable or a **feature-dimension mismatch**, retrain the model so that training and detection use identical MFCC settings.
+- Background noise reduces accuracy; use a quiet environment or add noise reduction.
+- Real-time latency depends on the microphone driver and hardware.
 
-## ⚠️ Current Limitations
+## Roadmap
 
-The following areas should be checked and improved as the project develops:
+- [ ] Replace legacy training script and model with up-to-date versions
+- [ ] Add voice activity detection (VAD)
+- [ ] Noise reduction in preprocessing
+- [ ] Compare classifiers (SVM, k-NN, small neural network)
+- [ ] Report accuracy, precision, recall and confusion matrix automatically
+- [ ] Port a lightweight version to a microcontroller / embedded DSP target
 
-- **Model compatibility:** The legacy training script and saved model may require updates.
-- **Background noise:** Environmental noise can affect audio quality.
-- **Feature consistency:** Training and detection must use compatible feature extraction settings.
-- **Recognition accuracy:** Performance should be measured using separate test data.
-- **Real-time processing:** Microphone handling and processing speed depend on the implementation and hardware.
+## Adding the demo GIF
 
-These limitations also provide opportunities for future experimentation.
+1. Run `realtime_voice_detector_gui` and record your screen with [ScreenToGif](https://www.screentogif.com/) (Windows) or any screen recorder.
+2. Keep it under about 10 seconds and 10 MB.
+3. Save it as `assets/demo.gif` and commit it.
 
-## 🔮 Future Improvements
+## Author
 
-Potential improvements include:
+**Mazharul Islam Chowdhury**: Electrical and Electronic Engineering student interested in digital signal processing, embedded systems, and machine learning.
 
-- Updating legacy scripts and model files.
-- Improving noise reduction and audio preprocessing.
-- Adding voice activity detection.
-- Comparing different machine learning classifiers.
-- Evaluating accuracy, precision, recall, and confusion matrices.
-- Improving the GUI and recognition feedback.
-- Exploring embedded voice recognition using microcontrollers and DSP libraries.
-- Developing a lightweight version for real-time embedded applications.
+[GitHub](https://github.com/Mazharul-Islam-Chowdhury)
 
-## 👨‍💻 About the Author
+## License
 
-<div align="center">
-
-### Mazharul Islam Chowdhury
-
-**Electrical and Electronic Engineering (EEE) Student**
-
-Interested in Digital Signal Processing, Embedded Systems, Machine Learning, and Electronics.
-
-[![GitHub](https://img.shields.io/badge/GitHub-Mazharul--Islam--Chowdhury-181717?style=for-the-badge&logo=github)](https://github.com/Mazharul-Islam-Chowdhury)
-
-</div>
-
-## 📄 License
-
-No license is currently specified in this README. If you want others to reuse or distribute your code, consider adding an appropriate open-source license to the repository.
-
----
-
-<div align="center">
-
-### ⭐ Thanks for Visiting!
-
-If you find this project interesting, consider starring the repository.
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0F2027,50:203A43,100:2C5364&height=120&section=footer" width="100%" alt="Decorative project footer"/>
-
-**Built with curiosity, signal processing, and engineering.**
-
-</div>
+Released under the [MIT License](LICENSE). Add a `LICENSE` file to the repository root to activate this.
