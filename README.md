@@ -64,21 +64,13 @@ From recording voice samples to extracting audio features and experimenting with
 
 <div align="center">
 
-```mermaid
-flowchart TD
-    A["🎤 Voice Input"] --> B["🎚️ Audio Preprocessing"]
-    B --> C["📊 MFCC Feature Extraction"]
-    C --> D["🧠 Trained ML Classifier"]
-    D --> E["🔎 Voice Classification"]
-    E --> F["📱 Recognition Output"]
-
-    style A fill:#164e63,color:#ffffff,stroke:#22d3ee
-    style B fill:#1e3a5f,color:#ffffff,stroke:#38bdf8
-    style C fill:#312e81,color:#ffffff,stroke:#818cf8
-    style D fill:#4c1d95,color:#ffffff,stroke:#c084fc
-    style E fill:#14532d,color:#ffffff,stroke:#4ade80
-    style F fill:#78350f,color:#ffffff,stroke:#fbbf24
-```
+<p align="center"> <img src="assets/pipeline.svg" alt="Animated processing pipeline" width="100%"/> </p>
+Stage	What happens
+Microphone	Audio is captured at [FS] Hz, mono.
+Preprocessing	Signal is split into [FRAME_MS] ms frames with [OVERLAP]% overlap, windowed with a [WINDOW] window, and normalised.
+MFCC	[N_MFCC] coefficients per frame from a [N_FILTERS]-band Mel filter bank, summarised into one feature vector per recording.
+Classifier	[CLASSIFIER, e.g. SVM / k-NN] trained on the recorded dataset.
+Prediction	Predicted label and confidence are shown live in the GUI.
 
 </div>
 
